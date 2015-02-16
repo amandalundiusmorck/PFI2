@@ -58,7 +58,8 @@ public class GUI extends JFrame {
 		txtAnimalList.setBounds(10, 11, 110, 20);
 		contentPane.add(txtAnimalList);
 		txtAnimalList.setColumns(10);
-
+		
+		//Katten skriver inte ut någon nursing time
 		animals.add(new Snake("slingrigus serpentus", false));
 		animals.add(new Dog("hund", "barkus svansus", true));
 		animals.add(new Cat("purrus meowus", 10, 5));
