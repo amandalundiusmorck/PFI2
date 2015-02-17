@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import java.util.Random; 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +26,10 @@ public class DigitalClockGUI extends JFrame {
 	private ClockLogic clockLogic; 
 	
 	JLabel lblAlarmClock = new JLabel("00:00:00");
-
+	JLabel lblAlarmSet = new JLabel("Alarm Set 00:00");
+	Random rand = new Random();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -90,6 +95,13 @@ public class DigitalClockGUI extends JFrame {
 		JButton btnSetAlarm = new JButton("Set Alarm");
 		btnSetAlarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Changes the color of the background!
+			     float hue = rand.nextFloat();
+			     float sat = (rand.nextInt(2000) + 5000) / 10000f;
+			     float lum = 0.8f;
+			     Color color = Color.getHSBColor(hue, sat, lum);
+			     contentPane.setBackground(color); 
+			     lblAlarmSet.setText(textFieldHour.getText() + ":" + textFieldMinutes.getText());
 			}
 		});
 		btnSetAlarm.setForeground(new Color(148, 0, 211));
@@ -107,7 +119,6 @@ public class DigitalClockGUI extends JFrame {
 		btnClearAlarm.setBounds(234, 197, 188, 40);
 		contentPane.add(btnClearAlarm);
 		
-		JLabel lblAlarmSet = new JLabel("Alarm Set 00:00");
 		lblAlarmSet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlarmSet.setForeground(Color.WHITE);
 		lblAlarmSet.setFont(new Font("Arial Unicode MS", Font.BOLD, 22));
