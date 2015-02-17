@@ -45,6 +45,7 @@ public class DigitalClockGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public DigitalClockGUI() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DigitalClockGUI.class.getResource("/Image/AlarmClockImage.png")));
 		setFont(new Font("Arial Unicode MS", Font.BOLD, 25));
 		setForeground(new Color(128, 0, 128));
@@ -119,6 +120,9 @@ public class DigitalClockGUI extends JFrame {
 		imageClock.setIcon(new ImageIcon(DigitalClockGUI.class.getResource("/Image/405706_LB_00_FB.EPS_1000.jpg")));
 		imageClock.setBounds(26, 0, 108, 141);
 		contentPane.add(imageClock);
+		//ny klocka
+		clockLogic = new ClockLogic(this);
+
 	}
 	public void setTimeOnLabel (String time){
 		lblAlarmClock.setText(time);

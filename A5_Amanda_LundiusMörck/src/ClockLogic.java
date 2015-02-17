@@ -7,6 +7,9 @@ public class ClockLogic implements ClockInterface {
 	
 	public ClockLogic (DigitalClockGUI clockIn){
 		this.clockGUI = clockIn;
+		//här måste man ha detta
+		Thread t = new ClockThread(this);
+		t.start();
 		
 	}
 	
