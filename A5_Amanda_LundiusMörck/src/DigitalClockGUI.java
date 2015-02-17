@@ -26,7 +26,9 @@ public class DigitalClockGUI extends JFrame {
 	private ClockLogic clockLogic; 
 	
 	JLabel lblAlarmClock = new JLabel("00:00:00");
-	JLabel lblAlarmSet = new JLabel("Alarm Set 00:00");
+	JLabel lblAlarmSet = new JLabel("No Alarm");
+	JButton btnClearAlarm = new JButton("Clear Alarm");
+	JLabel lblErrorMsg = new JLabel("");
 	Random rand = new Random();
 	
 	
@@ -67,7 +69,7 @@ public class DigitalClockGUI extends JFrame {
 		lblAlarmClock.setFont(new Font("Arial Unicode MS", Font.BOLD, 28));
 		lblAlarmClock.setForeground(Color.WHITE);
 		lblAlarmClock.setBackground(Color.WHITE);
-		lblAlarmClock.setBounds(164, 22, 237, 61);
+		lblAlarmClock.setBounds(164, 11, 237, 45);
 		contentPane.add(lblAlarmClock);
 		
 		textFieldHour = new JTextField();
@@ -85,33 +87,61 @@ public class DigitalClockGUI extends JFrame {
 		lblHour.setForeground(Color.WHITE);
 		lblHour.setBounds(71, 146, 63, 40);
 		contentPane.add(lblHour);
-		
+
 		JLabel lblMinutes = new JLabel("Minutes:");
 		lblMinutes.setForeground(Color.WHITE);
 		lblMinutes.setFont(new Font("Arial Unicode MS", Font.BOLD, 24));
 		lblMinutes.setBounds(37, 189, 98, 45);
 		contentPane.add(lblMinutes);
-		
+
 		JButton btnSetAlarm = new JButton("Set Alarm");
 		btnSetAlarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// Checks if the times set are legal.
+			    int hourCheck = Integer.parseInt(textFieldHour.getText());
+			    int minuteCheck = Integer.parseInt(textFieldMinutes.getText());
+
+			    if (hourCheck < 0 || hourCheck > 23 || minuteCheck < 0
+			      || minuteCheck > 59) {
+			     lblErrorMsg.setText("Bending time, are we?");
+			    } else {
+			     String zero4 = "";
+			     String zero5 = "";
+			     
+			     if (hourCheck < 10){
+			      zero4 = "0";
+			     }
+			     if (minuteCheck < 10){
+			      zero5 = "0";
+			     }
+			     
+			     // Changes the alarm label to match the input alarm
+			     lblAlarmSet.setText(zero4 + hourCheck + ":" + zero5 + minuteCheck);
+
 				//Changes the color of the background!
-			     float hue = rand.nextFloat();
-			     float sat = (rand.nextInt(2000) + 5000) / 10000f;
-			     float lum = 0.8f;
-			     Color color = Color.getHSBColor(hue, sat, lum);
-			     contentPane.setBackground(color); 
-			     lblAlarmSet.setText(textFieldHour.getText() + ":" + textFieldMinutes.getText());
+				float hue = rand.nextFloat();
+				float sat = (rand.nextInt(2000) + 5000) / 10000f;
+				float lum = 0.8f;
+				Color color = Color.getHSBColor(hue, sat, lum);
+				contentPane.setBackground(color); 
+				lblAlarmSet.setText("Alarm Set " + textFieldHour.getText() + ":" + textFieldMinutes.getText());
+				
+				zero4 = "";
+			    zero5 = "";
+			    
+			    lblErrorMsg.setText("");
 			}
-		});
+			}
+			});
 		btnSetAlarm.setForeground(new Color(148, 0, 211));
 		btnSetAlarm.setFont(new Font("Arial Unicode MS", Font.BOLD, 24));
 		btnSetAlarm.setBounds(234, 146, 188, 40);
 		contentPane.add(btnSetAlarm);
 		
-		JButton btnClearAlarm = new JButton("Clear Alarm");
+
 		btnClearAlarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblAlarmSet.setText("No Alarm");
 			}
 		});
 		btnClearAlarm.setForeground(new Color(148, 0, 211));
@@ -123,7 +153,7 @@ public class DigitalClockGUI extends JFrame {
 		lblAlarmSet.setForeground(Color.WHITE);
 		lblAlarmSet.setFont(new Font("Arial Unicode MS", Font.BOLD, 22));
 		lblAlarmSet.setBackground(Color.WHITE);
-		lblAlarmSet.setBounds(164, 83, 237, 40);
+		lblAlarmSet.setBounds(164, 54, 237, 40);
 		contentPane.add(lblAlarmSet);
 		
 		JLabel imageClock = new JLabel("");
@@ -131,6 +161,13 @@ public class DigitalClockGUI extends JFrame {
 		imageClock.setIcon(new ImageIcon(DigitalClockGUI.class.getResource("/Image/405706_LB_00_FB.EPS_1000.jpg")));
 		imageClock.setBounds(26, 0, 108, 141);
 		contentPane.add(imageClock);
+		lblErrorMsg.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblErrorMsg.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblErrorMsg.setForeground(Color.WHITE);
+		lblErrorMsg.setBounds(164, 99, 237, 36);
+		contentPane.add(lblErrorMsg);
+		
 		//ny klocka
 		clockLogic = new ClockLogic(this);
 
