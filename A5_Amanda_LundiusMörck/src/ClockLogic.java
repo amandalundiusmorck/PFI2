@@ -5,8 +5,12 @@ public class ClockLogic implements ClockInterface {
 	private int alarmHour;
 	private int alarmMinute;
 	
+	private int finalHour;
+	private int finalMinute;
+	
 	public ClockLogic (DigitalClockGUI clockIn){
 		this.clockGUI = clockIn;
+		
 		//här måste man ha detta
 		Thread t = new ClockThread(this);
 		t.start();
@@ -20,6 +24,11 @@ public class ClockLogic implements ClockInterface {
 	}
 	
 	public void clearAlarm(){
+		  clockGUI.lblAlarmSet.setText("No Alarm");
+		  clockGUI.lblAlarmMsg.setText("");
+		  clockGUI.lblErrorMsg.setText("");
+		  this.alarmHour = 100;
+		  this.alarmMinute = 100;
 		
 	}
 
@@ -38,11 +47,27 @@ public class ClockLogic implements ClockInterface {
 		  if (seconds < 10){
 		   zero3 = "0";
 		  }
+		  
 
-		clockGUI.setTimeOnLabel(zero1 + hours + ":" + zero2 + minutes + ":" + zero3 + seconds);
+		  String hourString = zero1 + Integer.toString(hours);
+		  String minuteString = zero2 + Integer.toString(minutes);
+		  String secondString = zero3 + Integer.toString(seconds);
+		  String finalTimeString = hourString + ":" + minuteString + ":"
+				  + secondString;
+
+		  clockGUI.setTimeOnLabel(finalTimeString);
+
 		  zero1 = "";
 		  zero2 = "";
 		  zero3 = "";
-		
+
+		  finalHour = hours;
+		  finalMinute = minutes;
+
+		  if (this.alarmHour == finalHour && this.alarmMinute == finalMinute) {
+			  System.out.println("Ring ring!");
+			  clockGUI.alarm(true);
+		  }
+
 	}
 }

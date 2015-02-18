@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 
 
 public class DigitalClockGUI extends JFrame {
@@ -29,6 +30,9 @@ public class DigitalClockGUI extends JFrame {
 	JLabel lblAlarmSet = new JLabel("No Alarm");
 	JButton btnClearAlarm = new JButton("Clear Alarm");
 	JLabel lblErrorMsg = new JLabel("");
+	JLabel lblAlarmMsg = new JLabel("");
+
+	
 	Random rand = new Random();
 	
 	
@@ -47,6 +51,8 @@ public class DigitalClockGUI extends JFrame {
 			}
 		});
 	}
+
+	
 
 	/**
 	 * Create the frame.
@@ -117,6 +123,8 @@ public class DigitalClockGUI extends JFrame {
 			     
 			     // Changes the alarm label to match the input alarm
 			     lblAlarmSet.setText(zero4 + hourCheck + ":" + zero5 + minuteCheck);
+			     
+			     clockLogic.setAlarm(hourCheck, minuteCheck);
 
 				//Changes the color of the background!
 				float hue = rand.nextFloat();
@@ -130,6 +138,7 @@ public class DigitalClockGUI extends JFrame {
 			    zero5 = "";
 			    
 			    lblErrorMsg.setText("");
+			    lblAlarmMsg.setText("");
 			}
 			}
 			});
@@ -141,7 +150,10 @@ public class DigitalClockGUI extends JFrame {
 
 		btnClearAlarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textFieldHour.setText("");
+				textFieldMinutes.setText("");
 				lblAlarmSet.setText("No Alarm");
+				clockLogic.clearAlarm();
 			}
 		});
 		btnClearAlarm.setForeground(new Color(148, 0, 211));
@@ -167,6 +179,14 @@ public class DigitalClockGUI extends JFrame {
 		lblErrorMsg.setForeground(Color.WHITE);
 		lblErrorMsg.setBounds(164, 99, 237, 36);
 		contentPane.add(lblErrorMsg);
+		lblAlarmMsg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAlarmMsg.setFont(new Font("Calibri", Font.BOLD, 24));
+		lblAlarmMsg.setForeground(Color.WHITE);
+		
+		
+		lblAlarmMsg.setBounds(164, 90, 237, 45);
+		contentPane.add(lblAlarmMsg);
+		
 		
 		//ny klocka
 		clockLogic = new ClockLogic(this);
@@ -177,6 +197,9 @@ public class DigitalClockGUI extends JFrame {
 	}
 	
 	public void alarm (boolean activate){
+		if (true) {
+			lblAlarmMsg.setText("ALARM!");
+		}
 		
 	}
 }
