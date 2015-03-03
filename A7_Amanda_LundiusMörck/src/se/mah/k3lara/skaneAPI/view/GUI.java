@@ -16,6 +16,7 @@ import se.mah.k3lara.skaneAPI.model.Station;
 import se.mah.k3lara.skaneAPI.xmlparser.Parser;
 
 import java.awt.Font;
+import java.util.Calendar;
 
 public class GUI extends JFrame {
 
@@ -35,7 +36,10 @@ public class GUI extends JFrame {
 	JLabel labelTime3 = new JLabel("");
 	JLabel labelTime4 = new JLabel("");
 	
-	JLabel lblLate = new JLabel("");
+	JLabel labelLate1 = new JLabel("");
+	JLabel labelLate2 = new JLabel("");
+	JLabel labelLate3 = new JLabel("");
+	JLabel labelLate4 = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -91,12 +95,6 @@ public class GUI extends JFrame {
 		lblAvgar.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblAvgar.setBounds(354, 49, 56, 21);
 		contentPane.add(lblAvgar);
-		
-		
-		lblLate.setForeground(Color.WHITE);
-		lblLate.setFont(new Font("Calibri", Font.PLAIN, 20));
-		lblLate.setBounds(450, 70, 70, 170);
-		contentPane.add(lblLate);
 		
 		
 		labelLinje1.setForeground(Color.WHITE);
@@ -170,22 +168,50 @@ public class GUI extends JFrame {
 		labelTime4.setBounds(354, 209, 84, 31);
 		contentPane.add(labelTime4);
 		
-		Lines lines = Parser.getStationResults(new Station("80046"));
+		  labelLate1.setForeground(Color.WHITE);
+		  labelLate1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		  labelLate1.setBounds(450, 70, 70, 31);
+		  contentPane.add(labelLate1);
+		  
+		  labelLate2.setForeground(Color.WHITE);
+		  labelLate2.setFont(new Font("Calibri", Font.PLAIN, 20));
+		  labelLate2.setBounds(450, 114, 70, 31);
+		  
+		  contentPane.add(labelLate2);
+		  labelLate3.setForeground(Color.WHITE);
+		  labelLate3.setFont(new Font("Calibri", Font.PLAIN, 20));
+		  labelLate3.setBounds(450, 158, 70, 31);
+		  
+		  contentPane.add(labelLate3);
+		  labelLate4.setForeground(Color.WHITE);
+		  labelLate4.setFont(new Font("Calibri", Font.PLAIN, 20));
+		  labelLate4.setBounds(450, 209, 70, 31);
+		  
+		  contentPane.add(labelLate4);
+		  
+		  	UpdateLables();
+			Lines lines = Parser.getStationResults(new Station("80046"));
 
-		  labelLinje1.setText(lines.getLines().get(0).getLine());
-		  labelLinje2.setText(lines.getLines().get(1).getLine());
-		  labelLinje3.setText(lines.getLines().get(2).getLine());
-		  labelLinje4.setText(lines.getLines().get(3).getLine());
-		  
-		  labelDes1.setText(lines.getLines().get(0).getDestination());
-		  labelDes2.setText(lines.getLines().get(1).getDestination());
-		  labelDes3.setText(lines.getLines().get(2).getDestination());
-		  labelDes4.setText(lines.getLines().get(3).getDestination());
-		  
-		  labelTime1.setText(lines.getLines().get(0).getDepTime().toString());
-		  labelTime2.setText(lines.getLines().get(1).getDepTime().toString());
-		  labelTime3.setText(lines.getLines().get(2).getDepTime().toString());
-		  labelTime4.setText(lines.getLines().get(3).getDepTime().toString());
+			  labelLinje1.setText(lines.getLines().get(0).getLine());
+			  labelLinje2.setText(lines.getLines().get(1).getLine());
+			  labelLinje3.setText(lines.getLines().get(2).getLine());
+			  labelLinje4.setText(lines.getLines().get(3).getLine());
+			  
+			  labelDes1.setText(lines.getLines().get(0).getDestination());
+			  labelDes2.setText(lines.getLines().get(1).getDestination());
+			  labelDes3.setText(lines.getLines().get(2).getDestination());
+			  labelDes4.setText(lines.getLines().get(3).getDestination());
+			  
+			  labelTime1.setText(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(0).getDepTime().get(Calendar.MINUTE));
+			  labelTime2.setText(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(1).getDepTime().get(Calendar.MINUTE));
+			  labelTime3.setText(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(2).getDepTime().get(Calendar.MINUTE));
+			  labelTime4.setText(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(3).getDepTime().get(Calendar.MINUTE));
+			  
+			  
+	}
+	
+	public void UpdateLables(){
+		
 	}
 	
 }
