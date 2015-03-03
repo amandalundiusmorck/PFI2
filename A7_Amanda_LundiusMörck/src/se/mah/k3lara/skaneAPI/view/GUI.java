@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
+	private SearchThread t;
 	JLabel labelLinje1 = new JLabel("");
 	JLabel labelLinje2 = new JLabel("");
 	JLabel labelLinje3 = new JLabel("");
@@ -190,33 +191,35 @@ public class GUI extends JFrame {
 		  contentPane.add(labelLate4);
 		  
 		  	UpdateLables();
-			Lines lines = Parser.getStationResults(new Station("80046"));
-
-			  labelLinje1.setText(lines.getLines().get(0).getLine());
-			  labelLinje2.setText(lines.getLines().get(1).getLine());
-			  labelLinje3.setText(lines.getLines().get(2).getLine());
-			  labelLinje4.setText(lines.getLines().get(3).getLine());
-			  
-			  labelDes1.setText(lines.getLines().get(0).getDestination());
-			  labelDes2.setText(lines.getLines().get(1).getDestination());
-			  labelDes3.setText(lines.getLines().get(2).getDestination());
-			  labelDes4.setText(lines.getLines().get(3).getDestination());
-			  
-			  /**
-			  labelTime1.setText(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(0).getDepTime().get(Calendar.MINUTE));
-			  labelTime2.setText(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(1).getDepTime().get(Calendar.MINUTE));
-			  labelTime3.setText(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(2).getDepTime().get(Calendar.MINUTE));
-			  labelTime4.setText(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(3).getDepTime().get(Calendar.MINUTE));
-			  */
-			  
-			  labelTime1.setText(FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.MINUTE)));
-			  labelTime2.setText(FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.MINUTE)));
-			  labelTime3.setText(FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.MINUTE)));
-			  labelTime4.setText(FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.MINUTE)));
+		  	Thread t = new SearchThread (this); 
+		  	t.start();
 			  
 	}
 	
 	public void UpdateLables(){
+		Lines lines = Parser.getStationResults(new Station("80046"));
+
+		  labelLinje1.setText(lines.getLines().get(0).getLine());
+		  labelLinje2.setText(lines.getLines().get(1).getLine());
+		  labelLinje3.setText(lines.getLines().get(2).getLine());
+		  labelLinje4.setText(lines.getLines().get(3).getLine());
+		  
+		  labelDes1.setText(lines.getLines().get(0).getDestination());
+		  labelDes2.setText(lines.getLines().get(1).getDestination());
+		  labelDes3.setText(lines.getLines().get(2).getDestination());
+		  labelDes4.setText(lines.getLines().get(3).getDestination());
+		  
+		  /**
+		  labelTime1.setText(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(0).getDepTime().get(Calendar.MINUTE));
+		  labelTime2.setText(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(1).getDepTime().get(Calendar.MINUTE));
+		  labelTime3.setText(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(2).getDepTime().get(Calendar.MINUTE));
+		  labelTime4.setText(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(3).getDepTime().get(Calendar.MINUTE));
+		  */
+		  
+		  labelTime1.setText(FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.MINUTE)));
+		  labelTime2.setText(FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.MINUTE)));
+		  labelTime3.setText(FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.MINUTE)));
+		  labelTime4.setText(FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.MINUTE)));
 		
 	}
 	

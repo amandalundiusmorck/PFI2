@@ -12,10 +12,11 @@ public class SearchThread extends Thread{
 	public void run() {
 		while(running==true){
 			try{
-				Thread.sleep(60000);
+				Thread.sleep(30000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println("Uppdaterar");
 			gui.UpdateLables();
 		}
 
