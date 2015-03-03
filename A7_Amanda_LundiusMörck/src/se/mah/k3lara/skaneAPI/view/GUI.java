@@ -41,6 +41,7 @@ public class GUI extends JFrame {
 	JLabel labelLate2 = new JLabel("");
 	JLabel labelLate3 = new JLabel("");
 	JLabel labelLate4 = new JLabel("");
+	private final JLabel lblSenmin = new JLabel("Sen (min)");
 
 	/**
 	 * Launch the application.
@@ -94,7 +95,7 @@ public class GUI extends JFrame {
 		JLabel lblAvgar = new JLabel("Avg\u00E5r");
 		lblAvgar.setForeground(Color.ORANGE);
 		lblAvgar.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblAvgar.setBounds(354, 49, 56, 21);
+		lblAvgar.setBounds(330, 49, 56, 21);
 		contentPane.add(lblAvgar);
 		
 		
@@ -148,47 +149,52 @@ public class GUI extends JFrame {
 		
 		labelTime1.setForeground(Color.WHITE);
 		labelTime1.setFont(new Font("Calibri", Font.PLAIN, 20));
-		labelTime1.setBounds(354, 70, 84, 31);
+		labelTime1.setBounds(330, 70, 84, 31);
 		contentPane.add(labelTime1);
 		
 		
 		labelTime2.setForeground(Color.WHITE);
 		labelTime2.setFont(new Font("Calibri", Font.PLAIN, 20));
-		labelTime2.setBounds(354, 114, 84, 31);
+		labelTime2.setBounds(330, 114, 84, 31);
 		contentPane.add(labelTime2);
 		
 		
 		labelTime3.setForeground(Color.WHITE);
 		labelTime3.setFont(new Font("Calibri", Font.PLAIN, 20));
-		labelTime3.setBounds(354, 158, 84, 31);
+		labelTime3.setBounds(330, 158, 84, 31);
 		contentPane.add(labelTime3);
 		
 		
 		labelTime4.setForeground(Color.WHITE);
 		labelTime4.setFont(new Font("Calibri", Font.PLAIN, 20));
-		labelTime4.setBounds(354, 202, 84, 31);
+		labelTime4.setBounds(330, 202, 84, 31);
 		contentPane.add(labelTime4);
 		
 		  labelLate1.setForeground(Color.WHITE);
 		  labelLate1.setFont(new Font("Calibri", Font.PLAIN, 20));
-		  labelLate1.setBounds(450, 70, 70, 31);
+		  labelLate1.setBounds(437, 70, 70, 31);
 		  contentPane.add(labelLate1);
 		  
 		  labelLate2.setForeground(Color.WHITE);
 		  labelLate2.setFont(new Font("Calibri", Font.PLAIN, 20));
-		  labelLate2.setBounds(450, 114, 70, 31);
+		  labelLate2.setBounds(437, 114, 70, 31);
 		  
 		  contentPane.add(labelLate2);
 		  labelLate3.setForeground(Color.WHITE);
 		  labelLate3.setFont(new Font("Calibri", Font.PLAIN, 20));
-		  labelLate3.setBounds(450, 158, 70, 31);
+		  labelLate3.setBounds(437, 158, 70, 31);
 		  
 		  contentPane.add(labelLate3);
 		  labelLate4.setForeground(Color.WHITE);
 		  labelLate4.setFont(new Font("Calibri", Font.PLAIN, 20));
-		  labelLate4.setBounds(450, 202, 70, 31);
+		  labelLate4.setBounds(437, 202, 70, 31);
 		  
 		  contentPane.add(labelLate4);
+		  lblSenmin.setForeground(Color.ORANGE);
+		  lblSenmin.setFont(new Font("Calibri", Font.BOLD, 20));
+		  lblSenmin.setBounds(438, 46, 82, 26);
+		  
+		  contentPane.add(lblSenmin);
 		  
 		  	UpdateLables();
 		  	Thread t = new SearchThread (this); 
@@ -209,18 +215,15 @@ public class GUI extends JFrame {
 		  labelDes3.setText(lines.getLines().get(2).getDestination());
 		  labelDes4.setText(lines.getLines().get(3).getDestination());
 		  
-		  /**
-		  labelTime1.setText(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(0).getDepTime().get(Calendar.MINUTE));
-		  labelTime2.setText(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(1).getDepTime().get(Calendar.MINUTE));
-		  labelTime3.setText(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(2).getDepTime().get(Calendar.MINUTE));
-		  labelTime4.setText(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)+":"+ lines.getLines().get(3).getDepTime().get(Calendar.MINUTE));
-		  */
-		  
 		  labelTime1.setText(FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.MINUTE)));
 		  labelTime2.setText(FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.MINUTE)));
 		  labelTime3.setText(FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.MINUTE)));
 		  labelTime4.setText(FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.MINUTE)));
 		
+		  labelLate1.setText(lines.getLines().get(0).getDepTimeDeviation());
+		  labelLate2.setText(lines.getLines().get(1).getDepTimeDeviation());
+		  labelLate3.setText(lines.getLines().get(2).getDepTimeDeviation());
+		  labelLate4.setText(lines.getLines().get(3).getDepTimeDeviation());
 	}
 	
 	public String FixThatClock(int time){
